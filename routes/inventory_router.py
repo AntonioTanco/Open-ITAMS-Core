@@ -1,6 +1,7 @@
 from fastapi import APIRouter
 from db.database import datebase
 from models.assetModel import assetModel
+from utils.generateAssetID import generate_uuid
 
 inv_router = APIRouter()
 
@@ -18,4 +19,8 @@ async def read_inventory():
 @inv_router.post("/inventory/create")
 async def create_inventory_record(asset : assetModel):
 
-    return {"message": "new recorded created" , "laptop": asset}
+    id = generate_uuid()
+
+    datebase['assets'].insert_one(asset.model_dump())
+
+    return {"message": "new recorded created" , "laptop": asset, "id": id}
