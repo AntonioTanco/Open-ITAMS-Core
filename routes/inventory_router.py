@@ -5,11 +5,11 @@ from utils.generateAssetID import generate_uuid
 
 inv_router = APIRouter()
 
-# assets = {
-#     "name": "Lenovo",
-#     "model": "X1",
-#     "assignedUser": "Alex Joe"
-# }
+laptop = {
+    "name": "Lenovo",
+    "model": "X1",
+    "assignedUser": "Alex Joe"
+}
 
 @inv_router.get("/inventory/")
 async def read_inventory():
@@ -21,6 +21,36 @@ async def create_inventory_record(asset : assetModel):
 
     id = generate_uuid()
 
-    datebase['assets'].insert_one(asset.model_dump())
+    # asset.uuid = str(id)
 
-    return {"message": "new recorded created" , "laptop": asset, "id": id}
+    response_1 = assetResponseModel(uuid=id, name=asset.name, model=asset.model, serialNumber=asset.serialNumber, assignedUser=asset.assignedUser).model_dump()
+
+
+    try:
+        response = asset.model_dump()
+
+        print(response)
+        datebase["assets"].insert_one(response_1)
+        print(response_1)
+
+        return response
+
+    except Exception as e:
+        
+        return {e}
+
+    # return {"message": "new recorded created" , "laptop": asset}
+
+@inv_router.get("/inventory/{id}")
+async def find_inventory_record(assetID : str):
+
+    try:
+
+        found_asset = datebase["assets"].find_one({"uuid": assetID})
+        asset = found_asset["name"]
+
+        return asset
+
+    except Exception as e:
+        
+        return {e}
