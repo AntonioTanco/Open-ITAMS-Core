@@ -1,6 +1,6 @@
 from fastapi import APIRouter
 from db.database import datebase
-from models.assetModel import assetModel
+from models.assetModel import assetModel, assetResponseModel
 from utils.generateAssetID import generate_uuid
 
 inv_router = APIRouter()
