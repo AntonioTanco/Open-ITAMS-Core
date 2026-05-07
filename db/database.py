@@ -23,5 +23,6 @@ try:
 
     datebase.create_collection("assets")
 
+    
 except Exception as e:
     print(e)
