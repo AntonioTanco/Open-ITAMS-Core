@@ -47,10 +47,26 @@ async def find_inventory_record(assetID : str):
     try:
 
         found_asset = datebase["assets"].find_one({"uuid": assetID})
+        
         asset = found_asset["name"]
 
         return asset
 
+    except Exception as e:
+        
+        return {e}
+    
+@inv_router.post("/inventory/{id}")
+async def modify_inventory_record(assetID : str, new_name: str):
+
+    try:
+
+        datebase["assets"].update_one({"uuid": assetID}, { "$set": {"name": new_name}})
+
+        found_asset = datebase["assets"].find_one({"uuid": assetID})
+
+        return found_asset["name"]
+    
     except Exception as e:
         
         return {e}
