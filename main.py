@@ -10,7 +10,7 @@ app.include_router(inv_router)
 @app.get('/')
 async def root():
 
-    genID = generate_uuid()
+    # genID = generate_uuid()
 
-    print(genID)
-    return {f"Dev Status": "test", "id": {genID}}
+    # print(genID)
+    return {"Dev Status": "test"}
