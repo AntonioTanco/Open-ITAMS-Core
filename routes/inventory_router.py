@@ -17,6 +17,7 @@ async def read_inventory():
 
     return {"Inventory": None}
 
+# endpoint for creating inventory records
 @inv_router.post("/inventory/create")
 async def create_inventory_record(asset : assetModel):
 
@@ -42,6 +43,7 @@ async def create_inventory_record(asset : assetModel):
 
     # return {"message": "new recorded created" , "laptop": asset}
 
+# endpoint for getting inventory record by uuid
 @inv_router.get("/inventory/{id}")
 async def find_inventory_record(assetID : str):
 
@@ -56,7 +58,8 @@ async def find_inventory_record(assetID : str):
     except Exception as e:
         
         return {e}
-    
+
+# endpoint for modifying inventory record by uuid
 @inv_router.post("/inventory/modify/{id}")
 async def modify_inventory_record(assetID : str, new_name: str):
 
@@ -71,7 +74,8 @@ async def modify_inventory_record(assetID : str, new_name: str):
     except Exception as e:
         
         return {e}
-    
+
+# endpoint for deleting inventory record by uuid
 @inv_router.delete("/inventory/modify/{id}")
 async def delete_inventory_record(assetID : str):
 
