@@ -56,7 +56,7 @@ async def find_inventory_record(assetID : str):
         
         return {e}
     
-@inv_router.post("/inventory/{id}")
+@inv_router.post("/inventory/modify/{id}")
 async def modify_inventory_record(assetID : str, new_name: str):
 
     try:
