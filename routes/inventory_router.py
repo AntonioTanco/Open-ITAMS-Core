@@ -70,3 +70,18 @@ async def modify_inventory_record(assetID : str, new_name: str):
     except Exception as e:
         
         return {e}
+    
+@inv_router.delete("/inventory/modify/{id}")
+async def delete_inventory_record(assetID : str):
+
+    try:
+
+        found_asset = datebase["assets"].find_one({"uuid": assetID})
+
+        datebase["assets"].delete_one({"uuid": assetID})
+
+        return (found_asset["name"] + " was removed from the database")
+
+    except Exception as e:
+    
+        return {e}
