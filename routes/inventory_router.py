@@ -11,6 +11,7 @@ laptop = {
     "assignedUser": "Alex Joe"
 }
 
+# endpoint for getting all the inventory records
 @inv_router.get("/inventory/")
 async def read_inventory():
 
